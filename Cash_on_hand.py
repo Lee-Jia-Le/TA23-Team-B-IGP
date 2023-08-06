@@ -46,8 +46,7 @@ def generate_summary_report(cash_on_hand):
             file.write(f"[CASH DEFICIT] DAY: {day + 1}, AMOUNT: USD {deficit_amount}\n")
 
 if __name__ == "__main__":
-    # Cash on hand scenarios 
-    
+    # Cash on hand scenarios     
     cash_on_hand_scenario1 = [3487400, 3329490, 2643180, 2365949, 2821462, 1112311, 1179895, 75233, 164433, 2700980, 2687691, 2010130, 1938975, 4068431, 2762974, 1617661, 2944445, 3651099, 1500097, 1554861]
     cash_on_hand_scenario2 = [3487400, 3329490, 2643180, 2365949, 2821462, 1112311, 1179895, 75233, 164433, 2700980, 2687691, 2010130, 1938975, 4068431, 2762974, 1617661, 2944445, 3651099, 1500097, 1554861]
 
