@@ -1,6 +1,15 @@
 import csv
 
 def read_csv_file(file_path):
+    """
+    Read data from a CSV file and return it as a list of dictionaries.
+
+    Parameters:
+        file_path (str): The path to the CSV file.
+
+    Returns:
+        list: A list of dictionaries representing the CSV data.
+    """
     data = []
     with open(file_path, 'r') as csv_file:
         reader = csv.DictReader(csv_file)
@@ -9,6 +18,16 @@ def read_csv_file(file_path):
     return data
 
 def compute_profit_difference(data):
+    """
+    Compute the days when the net profit increased and find the highest net profit increment.
+
+    Parameters:
+        data (list): A list of dictionaries representing the CSV data.
+
+    Prints:
+        str: Days when the net profit increased.
+        str: Highest net profit increment and the corresponding day.
+    """
     increase_days = [index for index, day_data in enumerate(data[1:], start=1) if float(day_data['Net Profit']) > float(data[index-1]['Net Profit'])]
 
     max_increment_day = None
@@ -25,6 +44,15 @@ def compute_profit_difference(data):
         print(f"[HIGHEST NET PROFIT SURPLUS] Day {max_increment_day}, Amount: USD{int(max_increment_amount)}")
 
 def compute_decrease_days(data):
+    """
+    Compute the days when the net profit decreased and the corresponding decrease amount.
+
+    Parameters:
+        data (list): A list of dictionaries representing the CSV data.
+
+    Returns:
+        list: A list of tuples containing the day and the decrease amount.
+    """
     decrease_days = []
     for index, day_data in enumerate(data[1:], start=1):
         net_profit = float(day_data['Net Profit'])
@@ -39,10 +67,10 @@ def compute_decrease_days(data):
 file_path = "Profits_and_Loss.csv"
 data = read_csv_file(file_path)
 
-print("Scenario 1:") ###remove as needed
+print("Scenario 1:") ###reminder to remove this
 compute_profit_difference(data)
 
-print("\nScenario 2:") ###remove as needed
+print("\nScenario 2:") ###reminder to remove this
 decrease_days = compute_decrease_days(data)
 for day, amount in decrease_days:
     print(f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}")
