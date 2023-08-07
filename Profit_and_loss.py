@@ -36,14 +36,13 @@ def compute_decrease_days(data):
 
     return decrease_days
 
-if __name__ == "__main__":
-    file_path = "Profits_and_Loss.csv"
-    data = read_csv_file(file_path)
+file_path = "Profits_and_Loss.csv"
+data = read_csv_file(file_path)
 
-    print("Scenario 1:") ###remove as needed
-    compute_profit_difference(data)
+print("Scenario 1:") ###remove as needed
+compute_profit_difference(data)
 
-    print("\nScenario 2:") ###remove as needed
-    decrease_days = compute_decrease_days(data)
-    for day, amount in decrease_days:
-        print(f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}")
+print("\nScenario 2:") ###remove as needed
+decrease_days = compute_decrease_days(data)
+for day, amount in decrease_days:
+    print(f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}")
