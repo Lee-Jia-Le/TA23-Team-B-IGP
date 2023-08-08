@@ -1,33 +1,15 @@
-import csv
 from pathlib import Path
+import csv
 
-#Set up the file path and open the CSV file for reading
-def process_csv_file(file_path, skip_condition=None):
-    with file_path.open(mode="r", encoding="UTF-8", newline="") as file:
-        reader = csv.reader(file)
-        next(reader)  # Skip the header
+fp = Path.cwd()/"overheads-day-90.csv"
+with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+    reader = csv.reader(file)
+    next(reader)
 
-    # create an empty list to store the overhead records 
-        overheadRecords = []
+    overheadRecords=[]
 
-        for row in reader:
-            if skip_condition and skip_condition(row):
-                continue  # Skip this row and move to the next iteration
-
-            overheadRecords.append([row[0], row[1]])  # Process the row if not skipped
-
-    return overheadRecords
-
-if __name__ == "__main__":
-    csv_file_path = Path.cwd() / "overheads-day-90.csv"
-
-    def custom_skip_condition(row):
-        # Define your custom condition here
-        # For example: return row[0] == "skip_this_row"
-        return False
-
-    result = process_csv_file(csv_file_path, skip_condition=custom_skip_condition)
-    # Now 'result' contains only the processed rows according to the condition
+    for row in reader:
+        overheadRecords.append([row[0], row[1]])
 
 # print(overheadRecords)
 # replace $ symbol 
@@ -51,7 +33,7 @@ def find_highest_value(list):
 #find the highest value expense
 highestValue = find_highest_value(Expenses_list)
 
-print(f"Overheadrecords: {result}")
+print(f"Overheadrecords: {overheadRecords}")
 print(f"Expense list: {Expenses_list}")
 print(f"highest value: {highestValue}")
 
