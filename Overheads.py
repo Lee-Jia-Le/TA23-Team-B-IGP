@@ -19,7 +19,7 @@ for item in result:
 # print(overheadRecords)
 # create a list to store the expenses 
 Expenses_list = []
-for item in result:
+for item in overheadRecords:
     if item[1] not in Expenses_list:
         Expenses_list.append(float(item[1])) #convert to float 
 
@@ -42,6 +42,6 @@ print(f"highest value: {highestValue}")
 #         if it contains the highestValue, print that list
 #         else: move on
 #Loop through overheadRecords to find and print the records with the highest expense value
-for i in result:
+for i in overheadRecords:
     if float(i[1]) == highestValue:
         print(i)
