@@ -13,7 +13,7 @@ with fp.open(mode="r", encoding="UTF-8", newline="") as file:
 
 # print(overheadRecords)
 # replace $ symbol 
-for item in result:
+for item in overheadRecords:
     value = item[1]
     item[1] = value.replace("$","")
 # print(overheadRecords)
