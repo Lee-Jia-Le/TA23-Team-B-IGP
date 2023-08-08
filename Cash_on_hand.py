@@ -46,14 +46,13 @@ def generate_summary_report(cash_on_hand):
                 deficit_amount = cash_on_hand[day - 1] - cash_on_hand[day]  # Correct the deficit_amount calculation
                 file.write(f"[CASH DEFICIT] DAY: {day}, AMOUNT: USD {deficit_amount}\n")
 
-if __name__ == "__main__":
-    # Read data from cash on hand.csv file
-    cash_on_hand = []
-    with open("cash_on_hand.csv", "r") as csv_file:
-        next(csv_file)  # Skip the header line
-        for line in csv_file:
-            day, cash = line.strip().split(',')
-            cash_on_hand.append(int(cash))
+# Read data from cash on hand.csv file
+cash_on_hand = []
+with open("cash_on_hand.csv", "r") as csv_file:
+    next(csv_file)  # Skip the header line
+    for line in csv_file:
+        day, cash = line.strip().split(',')
+        cash_on_hand.append(int(cash))
 
-    # Generate and save the summary report
-    generate_summary_report(cash_on_hand)
+# Generate and save the summary report
+generate_summary_report(cash_on_hand)
