@@ -39,7 +39,7 @@ def compute_profit_difference(data):
             max_increment_amount = difference
             max_increment_day = index
 
-    print("[Days OF NET PROFIT SURPLUS]", ", ".join(map(str, increase_days)))
+    print("[NET PROFIT SURPLUS] NET PROFIT IS HIGHER THAN ITS PREVIOUS DAY ONLY ON THE DAYS:",", ".join(map(str, increase_days)))
     if max_increment_day is not None:
         print(f"[HIGHEST NET PROFIT SURPLUS] Day {max_increment_day}, Amount: USD{int(max_increment_amount)}")
 
@@ -67,10 +67,8 @@ def compute_decrease_days(data):
 file_path = "Profits_and_Loss.csv"
 data = read_csv_file(file_path)
 
-print("Scenario 1:") ###reminder to remove this
 compute_profit_difference(data)
 
-print("\nScenario 2:") ###reminder to remove this
 decrease_days = compute_decrease_days(data)
 for day, amount in decrease_days:
     print(f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}")
