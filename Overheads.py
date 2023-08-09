@@ -1,47 +1,42 @@
 from pathlib import Path
 import csv
 
-fp = Path.cwd()/"Overheads.csv"
-with fp.open(mode="r", encoding="UTF-8", newline="") as file:
-    reader = csv.reader(file)
-    next(reader)
+def find_highest_overhead(csv_file_path):
+    fp = Path(csv_file_path)
+    with fp.open(mode="r", encoding="UTF-8", newline="") as file:
+        reader = csv.reader(file)
+        next(reader)
 
-    overheadRecords=[]
+        overheadRecords = []
 
-    for row in reader:
-        overheadRecords.append([row[0], row[1]])
+        for row in reader:
+            overheadRecords.append([row[0], row[1]])
 
-# print(overheadRecords)
-# replace $ symbol 
-for item in overheadRecords:
-    value = item[1]
-    item[1] = value.replace("$","")
-# print(overheadRecords)
-# create a list to store the expenses 
-Expenses_list = []
-for item in overheadRecords:
-    if item[1] not in Expenses_list:
-        Expenses_list.append(float(item[1])) #convert to float 
+        for item in overheadRecords:
+            value = item[1]
+            item[1] = value.replace("$", "")
 
-# print(Expenses_list)
+        Expenses_list = []
+        for item in overheadRecords:
+            if item[1] not in Expenses_list:
+                Expenses_list.append(float(item[1]))
 
-# create a function to find the highest value 
-def find_highest_value(list):
-    list.sort(reverse=True) # use list.sort to sort the values from ascending order 
-    return(list[0])
+        def find_highest_value(list):
+            list.sort(reverse=True)
+            return list[0]
 
-#find the highest value expense
-highestValue = find_highest_value(Expenses_list)
+        highestValue = find_highest_value(Expenses_list)
 
-print(f"Overheadrecords: {overheadRecords}")
-print(f"Expense list: {Expenses_list}")
-print(f"highest value: {highestValue}")
+        highest_overheads = []
+        for i in overheadRecords:
+            if float(i[1]) == highestValue:
+                highest_overheads.append(i)
 
-# loop thru the overheadRecords
-#     loop thru the list of list
-#         if it contains the highestValue, print that list
-#         else: move on
-#Loop through overheadRecords to find and print the records with the highest expense value
-for i in overheadRecords:
-    if float(i[1]) == highestValue:
-        print(i)
+        return highest_overheads
+
+# Call the function with your CSV file path
+csv_file_path = "Overheads.csv"
+result = find_highest_overhead(csv_file_path)
+
+for i in result:
+    print("HIGHEST OVERHEAD:", ' : '.join(i), "%")
