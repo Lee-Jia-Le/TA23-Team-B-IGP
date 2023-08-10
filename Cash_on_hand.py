@@ -26,14 +26,11 @@ def generate_summary_report(cash_on_hand):
     surplus_days, deficit_days = find_surplus_deficit_days(cash_on_hand)
 
     if surplus_days:
-        print("[CASH SURPLUS] CASH ON EACH DAY IS HIGHER THAN THE PREVIOUS DAY")
         day_of_highest_increment, highest_increment = find_highest_increment(cash_on_hand)
         print(f"[HIGHEST CASH SURPLUS] DAY: {day_of_highest_increment + 1}, AMOUNT: USD{highest_increment}")
-        for day in surplus_days:
-            surplus_amount = cash_on_hand[day] - cash_on_hand[day - 1]
-            print(f"[CASH SURPLUS] DAY: {day}, AMOUNT: USD{surplus_amount}")
-    else:
-        print("[NO CASH SURPLUS] CASH ON EACH DAY IS NOT HIGHER THAN THE PREVIOUS DAY")
+        # for day in surplus_days:
+        #     surplus_amount = cash_on_hand[day] - cash_on_hand[day - 1]
+        #     print(f"[CASH SURPLUS] DAY: {day}, AMOUNT: USD{surplus_amount}")
 
     if deficit_days:
         for day in deficit_days:
