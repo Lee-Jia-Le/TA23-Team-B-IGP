@@ -91,4 +91,3 @@ def get_output_strings(data):
         decrease_days_output += f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}\n"
 
     return increase_days_output, highest_increment_output, decrease_days_output
-
