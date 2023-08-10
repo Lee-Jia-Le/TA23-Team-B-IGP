@@ -7,7 +7,7 @@ from Overheads import find_highest_overhead as overhead_find_highest_overhead
 file_path = "Profits_and_Loss.csv"
 data = Profit_and_loss.read_csv_file(file_path)
 
-increase_days_output, highest_increment_output, decrease_days_output = Profit_and_loss.get_output_strings(data)
+increase_days_output, highest_increment_output, decrease_days_output = Profit_and_lossrofit_and_loss.get_output_strings(data)
 
 # creating strings for cash on hand for better presentation
 cash_on_hand_output = ""
