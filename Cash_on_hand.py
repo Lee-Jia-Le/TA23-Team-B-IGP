@@ -72,18 +72,6 @@ def generate_summary_report(cash_on_hand):
             summary += f"[CASH DEFICIT] DAY: {day}, AMOUNT: USD{deficit_amount}\n"
 
     return summary
-    # if surplus_days:
-    #     day_of_highest_increment, highest_increment = find_highest_increment(cash_on_hand)
-    #     print(f"[HIGHEST CASH SURPLUS] DAY: {day_of_highest_increment + 1}, AMOUNT: USD{highest_increment}")
-
-    # if deficit_days:
-    #     for day in deficit_days:
-    #         deficit_amount = cash_on_hand[day - 1] - cash_on_hand[day]
-    #         print(f"[CASH DEFICIT] DAY: {day}, AMOUNT: USD{deficit_amount}")
 
 # Generate the summary report and print it to the console
 generate_summary_report(cash_on_hand)
-
-# ... Other functions ...
-
-
