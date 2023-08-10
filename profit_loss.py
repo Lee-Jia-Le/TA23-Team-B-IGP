@@ -1,15 +1,6 @@
 import csv
 
 def read_csv_file(file_path):
-    """
-    Read data from a CSV file and return it as a list of dictionaries.
-
-    Parameters:
-        file_path (str): The path to the CSV file.
-
-    Returns:
-        list: A list of dictionaries representing the CSV data.
-    """
     data = []
     with open(file_path, 'r') as csv_file:
         reader = csv.DictReader(csv_file)
@@ -18,16 +9,6 @@ def read_csv_file(file_path):
     return data
 
 def compute_profit_difference(data):
-    """
-    Compute the days when the net profit increased and find the highest net profit increment.
-
-    Parameters:
-        data (list): A list of dictionaries representing the CSV data.
-
-    Prints:
-        str: Days when the net profit increased.
-        str: Highest net profit increment and the corresponding day.
-    """
     increase_days = [index for index, day_data in enumerate(data[1:], start=1) if float(day_data['Net Profit']) > float(data[index-1]['Net Profit'])]
 
     max_increment_day = None
@@ -39,20 +20,9 @@ def compute_profit_difference(data):
             max_increment_amount = difference
             max_increment_day = index
 
-    print("[NET PROFIT SURPLUS] NET PROFIT IS HIGHER THAN ITS PREVIOUS DAY ONLY ON THE DAYS:",", ".join(map(str, increase_days)))
-    if max_increment_day is not None:
-        print(f"[HIGHEST NET PROFIT SURPLUS] Day {max_increment_day}, Amount: USD{int(max_increment_amount)}")
+    return increase_days, max_increment_day, max_increment_amount
 
 def compute_decrease_days(data):
-    """
-    Compute the days when the net profit decreased and the corresponding decrease amount.
-
-    Parameters:
-        data (list): A list of dictionaries representing the CSV data.
-
-    Returns:
-        list: A list of tuples containing the day and the decrease amount.
-    """
     decrease_days = []
     for index, day_data in enumerate(data[1:], start=1):
         net_profit = float(day_data['Net Profit'])
@@ -64,11 +34,20 @@ def compute_decrease_days(data):
 
     return decrease_days
 
-file_path = "Profits_and_Loss.csv"
-data = read_csv_file(file_path)
+def get_output_strings(data):
+    increase_days, max_increment_day, max_increment_amount = compute_profit_difference(data)
+    
+    increase_days_output = ""
+    if increase_days:
+        increase_days_output = "[NET PROFIT SURPLUS] NET PROFIT IS HIGHER THAN ITS PREVIOUS DAY ONLY ON THE DAYS: " + ", ".join(map(str, increase_days))
+    
+    highest_increment_output = ""
+    if max_increment_day is not None:
+        highest_increment_output = f"[HIGHEST NET PROFIT SURPLUS] Day {max_increment_day}, Amount: USD{int(max_increment_amount)}"
 
-compute_profit_difference(data)
+    decrease_days = compute_decrease_days(data)
+    decrease_days_output = ""
+    for day, amount in decrease_days:
+        decrease_days_output += f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}\n"
 
-decrease_days = compute_decrease_days(data)
-for day, amount in decrease_days:
-    print(f"[PROFIT DEFICIT] Day: {day}, Amount: USD{int(amount)}")
+    return increase_days_output, highest_increment_output, decrease_days_output
