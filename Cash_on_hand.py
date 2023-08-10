@@ -1,5 +1,3 @@
-import csv
-
 # Read data from cash_on_hand.csv file
 cash_on_hand = []
 with open("cash_on_hand.csv", "r") as csv_file:
