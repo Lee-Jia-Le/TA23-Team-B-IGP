@@ -35,7 +35,7 @@ def find_highest_overhead(csv_file_path):
         # Format the highest overhead records
         formatted_result = ""
         for i in highest_overheads:
-            formatted_result += "HIGHEST OVERHEAD: " + ' : '.join(i) + "%\n"
+            formatted_result += "[HIGHEST OVERHEAD] " + ' : '.join(i) + "%\n"
 
         return formatted_result
 
