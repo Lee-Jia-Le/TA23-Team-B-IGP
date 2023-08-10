@@ -1,43 +1,33 @@
-import profit_loss
+import Profit_and_loss
 from Cash_on_hand import cash_on_hand, generate_summary_report as cash_generate_summary_report
 from Overheads import find_highest_overhead as overhead_find_highest_overhead
+# ^ Importing all the 3 python files and renaming functions here for more clarity
 
-# Read the CSV files and generate output strings
+# Reading the CSV files and creating strings for profit and loss
 file_path = "Profits_and_Loss.csv"
-data = profit_loss.read_csv_file(file_path)
+data = Profit_and_loss.read_csv_file(file_path)
 
-increase_days_output, highest_increment_output, decrease_days_output = profit_loss.get_output_strings(data)
+increase_days_output, highest_increment_output, decrease_days_output = Profit_and_loss.get_output_strings(data)
 
-# Cash on Hand
+# creating strings for cash on hand for better presentation
 cash_on_hand_output = ""
 cash_on_hand_summary = cash_generate_summary_report(cash_on_hand)
-cash_on_hand_output += "[CASH ON HAND SUMMARY]\n"
-cash_on_hand_output += cash_on_hand_summary
+cash_on_hand_output += "[CASH ON HAND SEGMENT]\n"
+cash_on_hand_output += "======================\n"
+cash_on_hand_output += cash_on_hand_summary # binds figures all into one string (cash_on_hand_output) to minimise cluttering at end
 
-# Overheads
+# creating strings for overheads for better presentation
 overheads_output = ""
 overheads_result = overhead_find_highest_overhead("Overheads.csv")
-overheads_output += "[OVERHEADS SUMMARY]\n"
-overheads_output += overheads_result
+overheads_output += "[OVERHEADS SEGMENT]\n"
+overheads_output += "===================\n"
+overheads_output += overheads_result # binds figures all into one string (overheads_output) to minimise cluttering at end
 
-# Write the output to output.txt
-output_file_path = "output.txt"
-
-with open(output_file_path, 'w') as output_file:
-    output_file.write("Profit and Loss Summary:\n")
-    output_file.write("Net Profit Increase Days:\n")
-    output_file.write(increase_days_output + "\n")
-    output_file.write("Highest Increment:\n")
-    output_file.write(highest_increment_output + "\n")
-    output_file.write("Profit Deficit Days:\n")
-    output_file.write(decrease_days_output + "\n\n")
-
-    output_file.write("Cash on Hand Summary:\n")
-    output_file.write(cash_on_hand_output + "\n\n")
-
-    output_file.write("Overheads Summary:\n")
+# Writing all of the strings to the summary_report.txt file for visual presentation
+with open("summary_report.txt", 'w') as output_file:
     output_file.write(overheads_output + "\n")
-
-print("Output has been written to", output_file_path)
-
-
+    output_file.write(cash_on_hand_output + "\n")
+    output_file.write("[PROFIT AND LOSS SEGMENT]\n")
+    output_file.write("=========================\n")
+    output_file.write(highest_increment_output + "\n")
+    output_file.write(decrease_days_output)
